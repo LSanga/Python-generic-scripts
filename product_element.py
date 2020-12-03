@@ -11,13 +11,13 @@ set_lenght = 5
 all_list = []
 all_list = list(itertools.product(set_elements, repeat=set_lenght))
 
-print "Number of sets: "+str(len(all_list))
+print ("Number of sets: "+str(len(all_list)))
 
 #print all sets, one per line
 for set in all_list:
 	for item in set:
-		print item,		
-	print
+		print (item),		
+	print()
 
 '''
 
