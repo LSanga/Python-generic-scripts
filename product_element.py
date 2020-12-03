@@ -1,5 +1,5 @@
 #This script generate the product of a set of elements of an arbitrary lenght (= all the possible combinations)
-#sest: ABC, lenght: 4
+#set: ABC, lenght: 4
 #Combinations: AAAA, AAAB,AAAC, AABA, AABB, AABC, ecc..
 
 import itertools
