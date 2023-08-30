@@ -1,4 +1,4 @@
-#This script convert .heic images into png or jp(e)g, using multithread as default (see line 37)
+#This script convert .heic images into png or jp(e)g, using multithread as default (see line 53)
 #JPEG and JPG are the same format but both input are accepted to avoid mistakes. In any case the resulting files will be saved as .jpg
 #To use it, copy the script in the folder where you have all the heic file and run with:
 #python3 convert-heic-images.py
