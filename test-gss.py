@@ -2,6 +2,7 @@ import requests
 
 # Replace with your actual API token
 API_TOKEN = "api_live.a11aaaaAaA3.a_-000aaaAAAaaa00ddddddddaaaaaaa"
+API_TOKEN_sandbox = "api_sandbox.a11aaaaAaA3.a_-000aaaAAAaaa00ddddddddaaaaaaa"
 
 # Replace with the applicant ID you want to perform a check on
 APPLICANT_ID = "APPLICANT_ID"
