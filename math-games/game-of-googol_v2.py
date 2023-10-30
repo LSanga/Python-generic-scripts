@@ -2,6 +2,8 @@
 Game of googol, reference: https://www.semanticscholar.org/paper/On-the-game-of-googol-Hill-Krengel/064b8720acd0e6dfeb7a70bf22e4f29e0d453c9b
 see this video from vsauce2 for more info https://www.youtube.com/watch?v=OeJobV4jJG0
 
+Version 2 adding more logic.
+
 Rules:
 -max_number is the highest number in the set
 -simulations is the number of times you simulate this game and get the resulting output
@@ -71,32 +73,20 @@ for _ in tqdm(range(simulations), desc="Simulations"):
     max_attempts = math.ceil(tiles / 2.71828)  # Approximation of e to 5 decimals
 
     # Pick tiles based on the euler number, or if we got a number very close to the maximum allowed (if permitted)
-    while attempts < max_attempts:
-    
+    for i in range(0, max_attempts):
         attempts += 1
-        # Create a set to keep track of selected indices
-        selected_indices = set()
-
-        while True:
-            random_index = random.randint(0, tiles - 1)
-            # Check if the index has already been selected
-            if random_index not in selected_indices:
-                selected_indices.add(random_index)   
-                current_max = max(current_max, grid[random_index])
-                
-                """
-                # Check if the number is close to the maximum allowed, and exit
-                if (abs(max_number - current_max) <= allowed_distance):
-                    stop_game = 1
-                    attempts = attempts_limit
-                    #print (f"Max in grid: {max_in_grid}. Candidate: {current_max}")
-                    break
-                """
-                    
-                break
+        current_max = max(current_max, grid[i])
+        """
+        # Check if the number is close to the maximum allowed, and exit
+        if (abs(max_number - current_max) <= allowed_distance):
+            stop_game = 1
+            attempts = attempts_limit
+            #print (f"Max in grid: {max_in_grid}. Candidate: {current_max}")
+            break
+        """              
                 
     # Now pick numbers until a new highest is found, we reach the limit of attempts or we got a good candidate previously
-    while True:
+    while attempts < tiles:
         attempts += 1
         
         # Check early strong candidates
@@ -109,11 +99,13 @@ for _ in tqdm(range(simulations), desc="Simulations"):
         current_max = max(current_max, new_number)
         
         # Close the game only if we found a higher number or we reached the max allowed attempts
-        if (current_max != old_max) or (attempts >= attempts_limit):
-            current_max = new_number
+        if current_max != old_max:
             break        
         else:
             continue
+    else:
+        # Here means we didn't found a higher number after max/e attempts, hence we lost the game
+        current_max = 0
     
     # Win/Loss counter
     if current_max == max_in_grid:
