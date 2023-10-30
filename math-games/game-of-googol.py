@@ -5,7 +5,7 @@ see this video from vsauce2 for more info https://www.youtube.com/watch?v=OeJobV
 Rules:
 -max_number is the highest number in the set
 -simulations is the number of times you simulate this game and get the resulting output
-(added rule)
+(optional added rule)
 -attempts_limit is the maximum number of picks you are allowed to take before lock a decision. Default is no more than 50% of the total
 
 Note: in the research paper it is mentioned that this strategy should give you a win rate of about 38%, so there must be an error in this script as results differs
@@ -33,20 +33,21 @@ import math
 from tqdm import tqdm
 
 #------------------Simulation variables------------------
-max_number = 100000000  # The highest number to reach. For perfomance reason, this is not set to a googol
+max_number = 1000  # The highest number to reach. For perfomance reason, this is not set to a googol
 tiles = 100  # The number of "numbers" in the grid
-attempts_limit = int(tiles * 0.50) # Max number of allowed attemps is X% of the grid. Default at 50%
+attempts_limit = 100
+#attempts_limit = int(tiles * 0.50) # Max number of allowed attemps is X% of the grid, eg. 50%. Defaukt disabled
 simulations = 30000  # Number of game simulations
 wins = 0  # Counter for games won
 losses = 0  # Counter for games lost
 
-# Make the script smarter
+# Make the script smarter. Default disabled
 threshold_percentage = 0.01  # Threshoold for the distance below
 allowed_distance = int(max_number * threshold_percentage) # Calculate the distance to understand if we picked a strong candidate number
 #------------------Simulation variables------------------
 print("------------------------------------------------------------------------------")
 print(f"Game conditions: \n\t-{max_number} highest possible number\n\t-{tiles} tiles\n\t-{attempts_limit} allowed attempts")
-print(f"\t-Stop if we find a number close to the maximum allowed up to {threshold_percentage*100}%")
+#print(f"\t-Stop if we find a number close to the maximum allowed up to {threshold_percentage*100}%")
 print("------------------------------------------------------------------------------\n")
 
 max_in_grid = 0
@@ -83,12 +84,14 @@ for _ in tqdm(range(simulations), desc="Simulations"):
                 selected_indices.add(random_index)   
                 current_max = max(current_max, grid[random_index])
                 
+                """
                 # Check if the number is close to the maximum allowed, and exit
                 if (abs(max_number - current_max) <= allowed_distance):
                     stop_game = 1
                     attempts = attempts_limit
                     #print (f"Max in grid: {max_in_grid}. Candidate: {current_max}")
                     break
+                """
                     
                 break
                 
